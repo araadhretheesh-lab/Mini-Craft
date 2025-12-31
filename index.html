@@ -3,20 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Araadh Minicraft</title>
+    <title>Araadh-miniCraft</title>
     <style>
-        body { margin: 0; overflow: hidden; background-color: #87CEEB; }
-        canvas { width: 100vw; height: 100vh; display: block; }
+        body { margin: 0; overflow: hidden; font-family: sans-serif; background-color: #87CEEB; }
+        #crosshair {
+            position: absolute; top: 50%; left: 50%;
+            width: 20px; height: 20px;
+            border: 2px solid white;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10;
+        }
+        #ui {
+            position: absolute; bottom: 20px; left: 20px;
+            color: white; background: rgba(0,0,0,0.5); padding: 10px;
+            z-index: 10;
+        }
     </style>
     <script type="importmap">
-        {
-            "imports": {
-                "three": "https://unpkg.com/three@0.157.0/build/three.module.js"
-            }
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.157.0/build/three.module.js"
         }
+    }
     </script>
 </head>
 <body>
+    <div id="crosshair"></div>
+    <div id="ui">1: Grass | 2: Dirt <br> Left Click: Break | Right Click: Place</div>
     <script type="module" src="main.js"></script>
 </body>
 </html>
