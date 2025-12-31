@@ -25,6 +25,7 @@ const raycaster = new THREE.Raycaster();
 const center = new THREE.Vector2(0, 0);
 let selectedBlock = 'grass';
 
+// Prevent right-click menu
 window.addEventListener('contextmenu', (e) => e.preventDefault());
 
 window.addEventListener('mousedown', (e) => {
@@ -35,7 +36,7 @@ window.addEventListener('mousedown', (e) => {
     }
     
     raycaster.setFromCamera(center, camera);
-    // Ensure these instances exist in your world.js
+    // Ensure these meshes exist in your world.js
     const hits = raycaster.intersectObjects([world.grassInst, world.dirtInst]);
 
     if (hits.length > 0) {
