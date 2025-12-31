@@ -4,6 +4,6 @@
   "type": "module",
   "dependencies": {
     "simplex-noise": "^4.0.3",
-    "three": "^0.157.0"
+    "three": "^0.182.0"
   }
 }
