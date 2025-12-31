@@ -25,22 +25,22 @@ const raycaster = new THREE.Raycaster();
 const center = new THREE.Vector2(0, 0);
 let selectedBlock = 'grass';
 
-// Prevent right-click menu for block placement
 window.addEventListener('contextmenu', (e) => e.preventDefault());
 
 window.addEventListener('mousedown', (e) => {
-    // Lock mouse on first click
+    // FIX: Catch the PointerLock promise to stop SecurityErrors
     if (document.pointerLockElement !== document.body) {
         document.body.requestPointerLock();
         return;
     }
     
     raycaster.setFromCamera(center, camera);
+    // Ensure these instances exist in your world.js
     const hits = raycaster.intersectObjects([world.grassInst, world.dirtInst]);
 
     if (hits.length > 0) {
-        if (e.button === 0) world.breakBlock(hits[0]); // Left Click: Break
-        if (e.button === 2) world.placeBlock(hits[0], selectedBlock); // Right Click: Place
+        if (e.button === 0) world.breakBlock(hits[0]);
+        if (e.button === 2) world.placeBlock(hits[0], selectedBlock);
     }
 });
 
@@ -53,7 +53,7 @@ function animate() {
     requestAnimationFrame(animate);
     player.update(world);
     
-    // Beefy Floating Origin Logic to prevent jitter
+    // Beefy Floating Origin Logic
     const lx = player.worldX - Math.floor(player.worldX);
     const lz = player.worldZ - Math.floor(player.worldZ);
     world.position.set(-lx, 0, -lz);
