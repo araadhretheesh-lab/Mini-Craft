@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Araadh-miniCraft</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>MiniCraft - 16x16</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.182.0/build/three.module.js"
+        }
+    }
+    </script>
 </head>
 <body>
     <div id="crosshair">+</div>
-    <div id="ui">1: Grass | 2: Dirt <br> Left Click: Break | Right Click: Place</div>
-
-    <script type="module" src="./main.js"></script>
+    <div id="ui">WASD: Move | Click: Lock Mouse</div>
+    <script type="module" src="main.js"></script>
 </body>
 </html>

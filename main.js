@@ -1,11 +1,7 @@
 import * as THREE from 'three';
-import { World } from './src/world.js';
-import { Player } from './src/player.js';
 
 const scene = new THREE.Scene();
-const skyColor = 0x87CEEB;
-scene.background = new THREE.Color(skyColor);
-scene.fog = new THREE.Fog(skyColor, 30, 60);
+scene.background = new THREE.Color(0x87CEEB); // Sky Blue
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -13,52 +9,33 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 scene.add(new THREE.AmbientLight(0xffffff, 0.8));
-const sun = new THREE.DirectionalLight(0xffffff, 0.5);
-sun.position.set(5, 15, 5);
-scene.add(sun);
 
-const world = new World();
-scene.add(world);
-const player = new Player(camera);
+// --- 16x16 Solid Grid ---
+const geometry = new THREE.BoxGeometry(1, 1, 1);
+const material = new THREE.MeshStandardMaterial({ color: 0x228B22 }); // Forest Green
 
-const raycaster = new THREE.Raycaster();
-const center = new THREE.Vector2(0, 0);
-let selectedBlock = 'grass';
-
-// Prevent right-click menu
-window.addEventListener('contextmenu', (e) => e.preventDefault());
-
-window.addEventListener('mousedown', (e) => {
-    // FIX: Catch the PointerLock promise to stop SecurityErrors
-    if (document.pointerLockElement !== document.body) {
-        document.body.requestPointerLock();
-        return;
+for (let x = 0; x < 16; x++) {
+    for (let z = 0; z < 16; z++) {
+        const block = new THREE.Mesh(geometry, material);
+        block.position.set(x, 0, z);
+        scene.add(block);
     }
-    
-    raycaster.setFromCamera(center, camera);
-    // Ensure these meshes exist in your world.js
-    const hits = raycaster.intersectObjects([world.grassInst, world.dirtInst]);
+}
 
-    if (hits.length > 0) {
-        if (e.button === 0) world.breakBlock(hits[0]);
-        if (e.button === 2) world.placeBlock(hits[0], selectedBlock);
-    }
-});
+camera.position.set(8, 5, 20);
+camera.lookAt(8, 0, 8);
 
-window.addEventListener('keydown', (e) => {
-    if (e.key === '1') selectedBlock = 'grass';
-    if (e.key === '2') selectedBlock = 'dirt';
-});
+// --- Simple Movement ---
+const keys = {};
+window.addEventListener('keydown', (e) => keys[e.code] = true);
+window.addEventListener('keyup', (e) => keys[e.code] = false);
 
 function animate() {
     requestAnimationFrame(animate);
-    player.update(world);
-    
-    // Beefy Floating Origin Logic
-    const lx = player.worldX - Math.floor(player.worldX);
-    const lz = player.worldZ - Math.floor(player.worldZ);
-    world.position.set(-lx, 0, -lz);
-    
+    if (keys['KeyW']) camera.position.z -= 0.1;
+    if (keys['KeyS']) camera.position.z += 0.1;
+    if (keys['KeyA']) camera.position.x -= 0.1;
+    if (keys['KeyD']) camera.position.x += 0.1;
     renderer.render(scene, camera);
 }
 animate();

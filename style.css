@@ -1,34 +1,12 @@
-body {
-    margin: 0;
-    overflow: hidden;
-    background-color: #87CEEB; /* Sky Blue */
-}
-
-canvas {
-    display: block;
-    width: 100vw;
-    height: 100vh;
-}
-
+body { margin: 0; overflow: hidden; background-color: #87CEEB; }
+canvas { display: block; width: 100vw; height: 100vh; }
 #ui {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    color: white;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    font-family: sans-serif;
-    pointer-events: none;
-    z-index: 10;
+    position: absolute; bottom: 20px; left: 20px;
+    color: white; background: rgba(0,0,0,0.5);
+    padding: 10px; font-family: sans-serif; z-index: 10;
 }
-
 #crosshair {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 24px;
-    pointer-events: none;
-    z-index: 10;
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); color: white;
+    font-size: 24px; z-index: 10;
 }
