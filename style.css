@@ -1,7 +1,7 @@
 body {
     margin: 0;
     overflow: hidden;
-    background-color: #87CEEB; /* Sky blue background while loading */
+    background-color: #87CEEB; /* Sky blue background */
 }
 
 canvas {
@@ -12,7 +12,7 @@ canvas {
 
 #ui {
     position: absolute;
-    bottom: 20px;
+    bottom: 20px; /* Moves instructions to the bottom */
     left: 20px;
     color: white;
     background: rgba(0, 0, 0, 0.5);
@@ -26,9 +26,9 @@ canvas {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 20px;
-    height: 20px;
-    border: 2px solid white;
+    color: white;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 10;
